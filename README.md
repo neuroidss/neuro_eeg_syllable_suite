@@ -181,8 +181,8 @@ During occlusion ($\theta_{\text{phase}} < 0.20$), voiced stops maintain glottal
 ### 4.1 Real-Time Syllable Rate & Theta Telemetry Panel
 The HUD telemetry widget displays live physiological parameters calculated directly from the brain engine:
 
-* **THETA PACEMAKER:** Current carrier frequency ($\bar{f}_{\theta}\text{ Hz}$) and syllable period ($T_{\text{syl}} = \frac{1000}{\bar{f}_{\theta}}\text{ ms}$).
-* **СКОРОСТЬ РЕЧИ:** Live speech tempo in syllables/sec ($\bar{f}_{\theta}$) and syllables/min ($\bar{f}_{\theta} \times 60$).
+* **THETA PACEMAKER:** Current carrier frequency $`\bar{f}_{\theta}\text{ Hz}`$ and syllable period $`T_{\text{syl}} = \frac{1000}{\bar{f}_{\theta}}\text{ ms}`$.
+* **СКОРОСТЬ РЕЧИ:** Live speech tempo in syllables/sec $`\bar{f}_{\theta}`$ and syllables/min $`\bar{f}_{\theta} \times 60`$.
 * **ЭКВИВАЛЕНТ ТЕМПА:** Equivalent 16-beat musical tempo ($\text{BPM} = \bar{f}_{\theta} \times 30$).
 * **32 GAMMA BINS:** Temporal duration of a single Working Memory quantum ($\Delta t_{\gamma} = \frac{T_{\text{syl}}}{32}\text{ ms}$).
 
