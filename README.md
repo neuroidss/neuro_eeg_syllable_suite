@@ -160,11 +160,11 @@ $$H(f) = \sum_{m=1}^{5} \frac{\text{Amp}_m}{1 + \left(\frac{f - F_m}{\text{BW}_m
 ### 3.3 Aerodynamic Plosive Burst & Reynolds Turbulence Noise
 * **Plosive Bursts $[T, K, P, B, D, G]$:** Transient snap amplitude follows a single phase-locked exponential decay starting at release ($\theta_{\text{phase}} = 0.20$):
 
-$$B(t) = \text{Burst\_Amp} \cdot e^{-40 \cdot (\theta_{\text{phase}}(t) - 0.20)}, \quad \theta_{\text{phase}} \in [0.20, 0.35)$$
+$$B(t) = \mathrm{Burst\_Amp} \cdot e^{-40 \cdot (\theta_{\text{phase}}(t) - 0.20)}, \quad \theta_{\text{phase}} \in [0.20, 0.35)$$
   
 * **Turbulent Frication $[S, SH]$:** Follows a continuous sine-bell envelope during the constriction phase:
 
-$$F(t) = \text{Fric\_Amp} \cdot \sin\left(\pi \frac{\theta_{\text{phase}}(t) - 0.20}{0.25}\right), \quad \theta_{\text{phase}} \in [0.20, 0.45)$$
+$$F(t) = \mathrm{Fric\_Amp} \cdot \sin\left(\pi \frac{\theta_{\text{phase}}(t) - 0.20}{0.25}\right), \quad \theta_{\text{phase}} \in [0.20, 0.45)$$
 
 ### 3.4 Dynamic Diphthongs & Iotated Vowels ([Я], [Ю])
 Unlike static vowels, iotated vowels $[JA]$ and $[JU]$ feature a **palatal $F_2$-onglide transition**:
