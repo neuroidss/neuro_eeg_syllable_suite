@@ -135,10 +135,13 @@ $$\text{Total Edges} = C_4^2 + C_{12}^2 + (4 \times 12) = 6 + 66 + 48 = 120$$
 
 ### 2.3 Audio-Rate $C^0$-Continuous Voicing Interpolation & Circular Phase Wrap
 To eliminate step-discontinuity clicks (DC pops) between the 32 discrete Gamma slices, the matrix is linearly interpolated at every audio sample on CUDA, and the phase index is circularly wrapped:
+
 $$\text{idx}_{\text{float}} = \tau(t) \cdot 32.0, \quad k = \lfloor \text{idx}_{\text{float}} \rfloor \pmod{32}, \quad k_{\text{next}} = (k + 1) \pmod{32}$$
+
 $$\mathbf{W}_{\text{stream}}(t) = (1 - \alpha) \cdot \mathbf{W}[k] + \alpha \cdot \mathbf{W}[k_{\text{next}}]$$
 
 The voicing gain is smoothed per-sample across the 1024-sample CUDA block:
+
 $$\mathbf{V}_{\text{block}}(n) = \text{linspace}\left(V_{\text{last}}, V_{\text{target}}, N=1024\right)$$
 
 ---
@@ -151,12 +154,16 @@ $$g(t) = 3\left(\frac{t}{T_p}\right)^2 - 2\left(\frac{t}{T_p}\right)^3, \quad s(
 
 ### 3.2 513-Bin CUDA FFT LTV-FIR Formant Resonator ($F_1\dots F_5$ + Velum Coupling)
 Vocal tract frequency response $H(f)$ is evaluated in the spectral domain across 513 FFT bins on CUDA (23.2 ms blocks) [19, 21]:
+
 $$H(f) = \sum_{m=1}^{5} \frac{\text{Amp}_m}{1 + \left(\frac{f - F_m}{\text{BW}_m / 2}\right)^2} + \left[ \frac{\text{Amp}_{\text{nasal}}}{1 + \left(\frac{f - 250}{45}\right)^2} \cdot \left( 1 - 0.70 e^{-\frac{1}{2}\left(\frac{f - 700}{120}\right)^2} \right) \right]$$
 
 ### 3.3 Aerodynamic Plosive Burst & Reynolds Turbulence Noise
 * **Plosive Bursts $[T, K, P, B, D, G]$:** Transient snap amplitude follows a single phase-locked exponential decay starting at release ($\theta_{\text{phase}} = 0.20$):
+
   $$B(t) = \text{Burst\_Amp} \cdot e^{-40 \cdot (\theta_{\text{phase}}(t) - 0.20)}, \quad \theta_{\text{phase}} \in [0.20, 0.35)$$
+  
 * **Turbulent Frication $[S, SH]$:** Follows a continuous sine-bell envelope during the constriction phase:
+
   $$F(t) = \text{Fric\_Amp} \cdot \sin\left(\pi \frac{\theta_{\text{phase}}(t) - 0.20}{0.25}\right), \quad \theta_{\text{phase}} \in [0.20, 0.45)$$
 
 ### 3.4 Dynamic Diphthongs & Iotated Vowels ([Я], [Ю])
@@ -173,8 +180,8 @@ During occlusion ($\theta_{\text{phase}} < 0.20$), voiced stops maintain glottal
 
 ### 4.1 Real-Time Syllable Rate & Theta Telemetry Panel
 The HUD telemetry widget displays live physiological parameters calculated directly from the brain engine:
-* **• THETA PACEMAKER:** Current carrier frequency ($\bar{f}_\theta\text{ Hz}$) and syllable period ($T_{\text{syl}} = \frac{1000}{\bar{f}_\theta}\text{ ms}$).
-* **• СКОРОСТЬ РЕЧИ:** Live speech tempo in syllables/sec ($\bar{f}_\theta$) and syllables/min ($\bar{f}_\theta \times 60$).
+• **THETA PACEMAKER:** Current carrier frequency ($\bar{f}_{\theta}\text{ Hz}$) and syllable period ($T_{\text{syl}} = \frac{1000}{\bar{f}_{\theta}}\text{ ms}$).
+• **СКОРОСТЬ РЕЧИ:** Live speech tempo in syllables/sec ($\bar{f}_{\theta}$) and syllables/min ($\bar{f}_{\theta} \times 60$).
 * **• ЭКВИВАЛЕНТ ТЕМПА:** Equivalent 16-beat musical tempo ($\text{BPM} = \bar{f}_\theta \times 30$).
 * **• 32 GAMMA BINS:** Temporal duration of a single Working Memory quantum ($\Delta t_\gamma = \frac{T_{\text{syl}}}{32}\text{ ms}$).
 
